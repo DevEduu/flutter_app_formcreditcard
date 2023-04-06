@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formcreditcard/const.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:formcreditcard/test/FlipCardWidget.dart';
 import 'widgets/InputForm.dart';
 
 void main() {
@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: HomeForm(),
       ),
@@ -26,82 +27,92 @@ class HomeForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: gray900,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(24),
-            child: Column(
+      body: SingleChildScrollView(
+        reverse: true,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(32),
+              child: FlipCardWidget(
+                  front: Image.asset('image/front.png'),
+                  back: Image.asset('image/back.png')),
+            ),
+            Container(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  InputForm(
+                    textLabel: 'Número do cartão',
+                    hintText: '**** **** **** ****',
+                    inputType: TextInputType.number,
+                  ),
+                  InputForm(
+                    textLabel: 'Nome do titular',
+                    hintText: 'Nome como está no cartão',
+                    inputType: TextInputType.text,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: InputForm(
+                          inputType: TextInputType.datetime,
+                          textLabel: 'Validade',
+                          hintText: 'mm/aa',
+                          iconButton: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.help,
+                              color: gray300,
+                              size: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: InputForm(
+                          inputType: TextInputType.number,
+                          textLabel: 'CVV',
+                          hintText: '***',
+                          iconButton: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.help,
+                              color: gray300,
+                              size: 18,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InputForm(
-                  textLabel: 'Número do cartão',
-                  hintText: '**** **** **** ****',
-                  inputType: TextInputType.number,
+                Icon(
+                  Icons.verified_user,
+                  color: statusSuccess,
+                  size: 18,
                 ),
-                InputForm(
-                  textLabel: 'Nome do titular',
-                  hintText: 'Nome como está no cartão',
-                  inputType: TextInputType.text,
+                const SizedBox(
+                  width: 5,
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: InputForm(
-                        inputType: TextInputType.datetime,
-                        textLabel: 'Validade',
-                        hintText: 'mm/aa',
-                        iconButton: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.help,
-                            color: gray300,
-                            size: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: InputForm(
-                        inputType: TextInputType.number,
-                        textLabel: 'CVV',
-                        hintText: '***',
-                        iconButton: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.help,
-                            color: gray300,
-                            size: 18,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                Text(
+                  'Seus dados estão seguros',
+                  style: inputText,
+                )
               ],
             ),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.verified_user,
-                color: statusSuccess,
-                size: 18,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text(
-                'Seus dados estão seguros',
-                style: inputText,
-              )
-            ],
-          ),
-          Buttom(
-            title: 'Adicionar cartão',
-          )
-        ],
+            Buttom(
+              title: 'Adicionar cartão',
+            )
+          ],
+        ),
       ),
     );
   }
@@ -119,7 +130,7 @@ class Buttom extends StatelessWidget {
         style: ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(brandColor),
           minimumSize: const MaterialStatePropertyAll(
-            Size(double.maxFinite, 56),
+            Size(double.maxFinite, 60),
           ),
         ),
         onPressed: () {},

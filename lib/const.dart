@@ -36,3 +36,9 @@ TextStyle buttomLabel = GoogleFonts.sourceSansPro(
   fontSize: 18,
   fontWeight: FontWeight.w600,
 );
+TextStyle cardNumber = GoogleFonts.sourceSansPro(
+  color: gray050,
+  fontSize: 16,
+  fontWeight: FontWeight.w600,
+  letterSpacing: 5,
+);

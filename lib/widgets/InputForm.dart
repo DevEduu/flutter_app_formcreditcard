@@ -36,14 +36,17 @@ class InputForm extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: inputText,
-                border: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(4)),
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4),
                   borderSide: BorderSide(
-                    color: gray400,
+                    color: gray700,
                     width: 1.5,
                   ),
                 ),
-                filled: true,
+
                 // Focused
                 focusedBorder: OutlineInputBorder(
                   borderRadius: const BorderRadius.all(
@@ -54,7 +57,11 @@ class InputForm extends StatelessWidget {
                     width: 1.5,
                   ),
                 ),
-                // Hover
+                focusedErrorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: statusError,
+                  ),
+                ),
 
                 // Status Erros
                 errorBorder: OutlineInputBorder(
